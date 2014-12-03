@@ -3,7 +3,7 @@
         <resources>
             <oo_websites translate="title" module="core">
                 <title>Website Management</title>
-                <model>OpenobjectConnector/oocore_website</model>
+                <model>ooconnector/oocore_website</model>
                 <acl>core/store</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -41,7 +41,7 @@
             </oo_websites>
             <oo_groups translate="title" module="core">
                 <title>Groups Management</title>
-                <model>OpenobjectConnector/oocore_groups</model>
+                <model>ooconnector/oocore_groups</model>
                 <acl>core/store</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -83,7 +83,7 @@
             </oo_groups>
             <oo_storeviews translate="title" module="core">
                 <title>Stores Management</title>
-                <model>OpenobjectConnector/oocore_storeviews</model>
+                <model>ooconnector/oocore_storeviews</model>
                 <acl>core/store</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -125,7 +125,7 @@
             </oo_storeviews>
             <oo_catalog_category_media translate="title" module="catalog">
                 <title>Product Images API</title>
-                <model>OpenobjectConnector/oocatalog_categories</model>
+                <model>ooconnector/oocatalog_categories</model>
                 <acl>catalog/category</acl>
                 <methods>
                     <list translate="title" module="catalog">
@@ -192,7 +192,7 @@
             </oo_catalog_category_media>
             <oo_catalog_product_attribute translate="title" module="catalog">
                 <title>Product Images API</title>
-                <model>OpenobjectConnector/oocatalog_product_attribute</model>
+                <model>ooconnector/oocatalog_product_attribute</model>
                 <acl>catalog/category</acl>
                 <methods>
                     <list translate="title" module="catalog">
@@ -221,7 +221,7 @@
             </oo_catalog_product_attribute>
             <oo_catalog_product_attribute_group translate="title" module="catalog">
                 <title>Product Images API</title>
-                <model>OpenobjectConnector/oocatalog_product_attributegroup</model>
+                <model>ooconnector/oocatalog_product_attributegroup</model>
                 <acl>catalog/category</acl>
                 <methods>
                     <list translate="title" module="catalog">
@@ -238,7 +238,7 @@
             </oo_catalog_product_attribute_group>
             <oo_customer_groups translate="title" module="core">
                 <title>Groups Management</title>
-                <model>OpenobjectConnector/oocustomer_group</model>
+                <model>ooconnector/oocustomer_group</model>
                 <acl>customer/group</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -279,7 +279,7 @@
             </oo_customer_groups>
             <oo_customer_address translate="title" module="core">
                 <title>Address Management</title>
-                <model>OpenobjectConnector/oocustomer_address</model>
+                <model>ooconnector/oocustomer_address</model>
                 <acl>customer/group</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -320,7 +320,7 @@
             </oo_customer_address>
             <oo_customer_subscriber translate="title" module="core">
                 <title>Subscriber Management</title>
-                <model>OpenobjectConnector/oocustomer_subscriber</model>
+                <model>ooconnector/oocustomer_subscriber</model>
                 <acl>customer/group</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -361,7 +361,7 @@
             </oo_customer_subscriber>
             <oo_customer translate="title" module="core">
                 <title>Customers Management</title>
-                <model>OpenobjectConnector/oocustomer_customer</model>
+                <model>ooconnector/oocustomer_customer</model>
                 <acl>customer/group</acl>
                 <methods>
                     <search translate="title" module="core">
@@ -406,7 +406,7 @@
             </oo_customer>
             <oo_catalog_product_tierprice translate="title" module="catalog">
                 <title>Product Tier Price API</title>
-                <model>OpenobjectConnector/oocatalog_product_tierprice</model>
+                <model>ooconnector/oocatalog_product_tierprice</model>
                 <acl>catalog/category</acl>
                 <methods>
                     <list translate="title" module="catalog">
@@ -431,7 +431,7 @@
             </oo_catalog_product_tierprice>
             <oo_catalog_product translate="title" module="core">
                 <title>Address Management</title>
-                <model>OpenobjectConnector/oocatalog_products</model>
+                <model>ooconnector/oocatalog_products</model>
                 <acl>catalog/product</acl>
                 <methods>
                     <old_search translate="title" module="core">
@@ -488,7 +488,7 @@
             </oo_catalog_product>
             <oo_catalog_product_attributeset translate="title" module="core">
                 <title>Attribute Set Management</title>
-                <model>OpenobjectConnector/oocatalog_product_attributeset</model>
+                <model>ooconnector/oocatalog_product_attributeset</model>
                 <acl>catalog/product</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -513,7 +513,7 @@
             </oo_catalog_product_attributeset>
             <oo_catalog_product_link>
                 <title>Product Link</title>
-                <model>OpenobjectConnector/oocatalog_product_link</model>
+                <model>ooconnector/oocatalog_product_link</model>
                 <acl>catalog/product</acl>
                 <methods>
                     <list translate="title" module="core">
@@ -624,7 +624,7 @@
            </catalog_product>
             <oerp_catalog_category translate="title" module="Openobject_OpenobjectConnector">
                 <title>Product Category API</title>
-                <model>OpenobjectConnector/oerpcatalog_category_api</model>
+                <model>ooconnector/oerpcatalog_category_api</model>
                 <acl>catalog/category/move</acl>
                 <methods>
                     <move translate="title" module="Openobject_OpenobjectConnector">
@@ -635,7 +635,7 @@
             </oerp_catalog_category>
 
             <oerp_cataloginventory_stock_item translate="title" module="Openobject_OpenobjectConnector">
-                <model>OpenobjectConnector/oerpstock_item_api</model>
+                <model>ooconnector/oerpstock_item_api</model>
                 <title>Inventory API</title>
                 <acl>cataloginventory</acl>
                 <methods>

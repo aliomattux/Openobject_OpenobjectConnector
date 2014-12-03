@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Openobject_ooconnector>
+        <Openobject_OpenobjectConnector>
             <version>0.0.1</version>
-        </Openobject_ooconnector>
+        </Openobject_OpenobjectConnector>
     </modules>
     <frontend>
         <routers>
             <ooconnector>
                 <use>standard</use>
                 <args>
-                    <module>Openobject_ooconnector</module>
+                    <module>Openobject_OpenobjectConnector</module>
                     <frontName>ooconnector</frontName>
                 </args>
             </ooconnector>
@@ -19,20 +19,18 @@
     <global>
         <models>
             <ooconnector>
-                <class>Openobject_ooconnector_Model</class>
+                <class>Openobject_OpenobjectConnector_Model</class>
             </ooconnector>
             <sales>
                 <rewrite>
-                    <order_api>Openobject_ooconnector_Model_Sales_Order_Api</order_api>
-		    
-<order_invoice_api>Openobject_ooconnector_Model_Sales_Order_Invoice_Api</order_invoice_api>
-		    
-<order_shipment_api>Openobject_ooconnector_Model_Sales_Order_Shipment_Api</order_shipment_api>
+                    <order_api>Openobject_OpenobjectConnector_Model_Sales_Order_Api</order_api>
+		    <order_invoice_api>Openobject_OpenobjectConnector_Model_Sales_Order_Invoice_Api</order_invoice_api>
+		    <order_shipment_api>Openobject_OpenobjectConnector_Model_Sales_Order_Shipment_Api</order_shipment_api>
                 </rewrite>
             </sales>
             <catalog>
                 <rewrite>
-                    <product_api>Openobject_ooconnector_Model_Catalog_Product_Api</product_api>
+                    <product_api>Openobject_OpenobjectConnector_Model_Catalog_Product_Api</product_api>
                 </rewrite>
             </catalog>
         </models>
@@ -50,32 +48,21 @@
         </resources>
         <blocks>
             <ooconnector>
-                <class>Openobject_ooconnector_Block</class>
+                <class>Openobject_OpenobjectConnector_Block</class>
             </ooconnector>
         </blocks>
         <helpers>
             <ooconnector>
-                <class>Openobject_ooconnector_Helper</class>
+                <class>Openobject_OpenobjectConnector_Helper</class>
             </ooconnector>
         </helpers>
-        <events>
-            <sales_order_place_after>
-                <observers>
-                    <init_imported_after_place_order>
-                        <type>singleton</type>
-                        <class>ooconnector/observer</class>
-                        <method>initImported</method>
-                    </init_imported_after_place_order>
-                </observers>
-            </sales_order_place_after>
-        </events>
     </global>
     <admin>
         <routers>
             <ooconnector>
                 <use>admin</use>
                 <args>
-                    <module>Openobject_ooconnector</module>
+                    <module>Openobject_OpenobjectConnector</module>
                     <frontName>connector</frontName>
                 </args>
             </ooconnector>
