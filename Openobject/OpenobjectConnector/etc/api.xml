@@ -430,7 +430,7 @@
                 </faults>
             </oo_catalog_product_tierprice>
             <oo_catalog_product translate="title" module="core">
-                <title>Address Management</title>
+                <title>Catalog Management</title>
                 <model>ooconnector/oocatalog_products</model>
                 <acl>catalog/product</acl>
                 <methods>
@@ -443,31 +443,31 @@
                         <method>search</method>
                     </search>
                     <list translate="title" module="core">
-                        <title>Enumerate Products</title>
+                        <title>Fetch list of products</title>
                         <method>items</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create Products</title>
                         <method>create</method>
                     </create>
-                    <biglist translate="title" module="core">
-                        <title>Fetch detail of products</title>
-                        <method>biglist</method>
-                    </biglist>
-                    <otherinfo translate="title" module="core">
-                        <title>Fetch detail of products</title>
-                        <method>otherinfo</method>
-                    </otherinfo>
+                    <multinfo translate="title" module="core">
+                        <title>Fetch multiple product info</title>
+                        <method>multinfo</method>
+                    </multinfo>
+                    <info translate="title" module="core">
+                        <title>Fetch single product info</title>
+                        <method>info</method>
+                    </info>
                     <associatedproducts translate="title" module="core">
-                        <title>Fetch configurable simple products</title>
+                        <title>Fetch configurable simple product association</title>
                         <method>associatedproducts</method>
                     </associatedproducts>
                     <update translate="title" module="core">
-                        <title>Update groups info</title>
+                        <title>Update single Product info</title>
                         <method>update</method>
                     </update>
                     <delete translate="title" module="core">
-                        <title>Delete groups</title>
+                        <title>Delete single Product</title>
                         <method>delete</method>
                     </delete>
                 </methods>

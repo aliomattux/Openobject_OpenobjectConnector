@@ -74,14 +74,6 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
 
 
 
-    /**
-     * Retrieve list of products with basic info (id, sku, type, set, name)
-     *
-     * @param array $filters
-     * @param string|int $store
-     * @return array
-     */
-
     public function items($filters = null, $store = null)
     {
         $collection = Mage::getModel('catalog/product')->getCollection()
@@ -142,16 +134,9 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
     }
 
 
-    /**
-     * Retrieve product info
-     *
-     * @param int|string $productId
-     * @param string|int $store
-     * @param array $attributes
-     * @return array
-     */
+    public function multinfo($productIds) {
+	/* Fetch multiple products info */
 
-    public function biglist($productIds) {
 	$store = null;
 	$filters = null;
 
@@ -161,27 +146,30 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
                 ->addAttributeToSelect('*');
 
         $result = array ();
-        foreach ($collection as $collection_item) {
-		$coll_array = $collection_item->toArray();
-                $coll_array['categories'] = $collection_item->getCategoryIds();
-                $coll_array['websites'] = $collection_item->getWebsiteIds();
-		if ($collection_item->getTypeId() == 'configurable'){
-		        $attribute_array = $collection_item->getTypeInstance(true)->getConfigurableAttributesAsArray($collection_item);
-			$attrs = array();
-			foreach ($attribute_array as $attr) {
-			    $attrs[] = $attr['attribute_id'];
 
-			}
-			$coll_array['super_attributes'] = $attrs;
+        foreach ($collection as $collection_item) {
+	    $coll_array = $collection_item->toArray();
+            $coll_array['categories'] = $collection_item->getCategoryIds();
+            $coll_array['websites'] = $collection_item->getWebsiteIds();
+	    if ($collection_item->getTypeId() == 'configurable'){
+	        $attribute_array = $collection_item->getTypeInstance(true)->getConfigurableAttributesAsArray($collection_item);
+		$attrs = array();
+		foreach ($attribute_array as $attr) {
+		    $attrs[] = $attr['attribute_id'];
+
 		}
 
-                $result[] = $coll_array;
+		$coll_array['super_attributes'] = $attrs;
+	    }
+
+            $result[] = $coll_array;
         }
 
         return $result;
     }
 
-    public function otherinfo($productId) {
+    public function info($productId) {
+	/* Fetch one products info */
         $store = null;
         $filters = null;
 
@@ -191,23 +179,24 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
                 ->addAttributeToSelect('*');
 
         foreach ($collection as $collection_item) {
-                $coll_array = $collection_item->toArray();
-                $coll_array['categories'] = $collection_item->getCategoryIds();
-                $coll_array['websites'] = $collection_item->getWebsiteIds();
-               	if ($collection_item->getTypeId() == 'configurable'){
-			$attribute_array = $collection_item->getTypeInstance(true)->getConfigurableAttributesAsArray($collection_item);
-                       	$attrs = array();
-                        foreach ($attribute_array as $attr) {
-                            $attrs[] = $attr['attribute_id'];
+            $coll_array = $collection_item->toArray();
+            $coll_array['categories'] = $collection_item->getCategoryIds();
+            $coll_array['websites'] = $collection_item->getWebsiteIds();
+            if ($collection_item->getTypeId() == 'configurable'){
+	        $attribute_array = $collection_item->getTypeInstance(true)->getConfigurableAttributesAsArray($collection_item);
+                $attrs = array();
 
-                       	}
-                        $coll_array['super_attributes'] = $attrs;
-               	}
+                foreach ($attribute_array as $attr) {
+		    $attrs[] = $attr['attribute_id'];
 
-		return $coll_array;
+                }
+
+                $coll_array['super_attributes'] = $attrs;
+            }
+
+	    return $coll_array;
         }
 
-        return $result;
     }
 
     /**
