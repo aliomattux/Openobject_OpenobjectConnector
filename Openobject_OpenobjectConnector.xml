@@ -1,0 +1,12 @@
+<config>
+    <modules>
+        <Openobject_OpenobjectConnector>
+            <codePool>community</codePool>
+            <active>true</active>
+            <depends>
+                <Mage_Api />
+                <Mage_Catalog />
+            </depends>
+        </Openobject_OpenobjectConnector>
+    </modules>
+</config>
