@@ -1,11 +1,12 @@
 <?php
-
 /**
- *
- * @author     Mohammed NAHHAS
- * @package Openobject_OpenobjectConnector
- *
- */
+Openobject Magento Connector
+Generic API Extension for Magento Community/Enterprise Editions
+This connector is a reboot of the original Openlabs OpenERP Connector
+Copyright 2014 Kyle Waid
+Copyright 2009 Openlabs / Sharoon Thomas
+Some works Copyright by Mohammed NAHHAS
+*/
 class Openobject_OpenobjectConnector_Model_Sales_Order_Shipment_Api extends Mage_Sales_Model_Order_Shipment_Api {
 
 
