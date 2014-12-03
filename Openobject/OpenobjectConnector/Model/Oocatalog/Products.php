@@ -74,11 +74,16 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
 
 
 
+    /**
+     * Retrieve list of products with basic info (id, sku, type, set, name)
+     *
+     * @param array $filters
+     * @param string|int $store
+     * @return array
+     */
 
-    public function list($filters = null, $store = null) {
-        /*
-	  Return a list of products
-	*/
+    public function items($filters = null, $store = null)
+    {
         $collection = Mage::getModel('catalog/product')->getCollection()
             ->setStoreId($this->_getStoreId($store))
             ->addAttributeToSelect('name');
@@ -99,7 +104,8 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
 
         $result = array();
         foreach ($collection as $product) {
-            $result[] = array(
+//            $result[] = $product->getData();
+            $result[] = array( // Basic product data
                 'product_id' => $product->getId(),
                 'sku'        => $product->getSku(),
                 'name'       => $product->getName(),

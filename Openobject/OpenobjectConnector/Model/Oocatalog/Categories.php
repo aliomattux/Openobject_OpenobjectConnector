@@ -9,7 +9,7 @@
 
 class Openobject_OpenobjectConnector_Model_Oocatalog_Categories extends Mage_Catalog_Model_Api_Resource
 {
-    public function list($filters = null) {
+    public function items($filters = null) {
         try {
             $collection = Mage :: getModel('catalog/category/attribute')->getCollection()->addAttributeToSelect('image');
         } catch (Mage_Core_Exception $e) {

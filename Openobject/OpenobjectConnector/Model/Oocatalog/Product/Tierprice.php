@@ -11,7 +11,7 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Tierprice extends M
     const ATTRIBUTE_CODE = 'tier_price';
 
 
-    public function list($productIds=null) {
+    public function items($productIds=null) {
         if (is_array($productIds)) {
             $result = array ();
             foreach ($productIds as $productId) {
@@ -27,5 +27,20 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Tierprice extends M
 
     }
 
+    public function items2($productIds=null) {
+                $product = Mage :: getModel('catalog/product_attribute_backend_tierprice')->_get_set_go();
+                if (!$product->getId()) {
+                    $this->_fault('product_not_exists');
+                }
+
+                $tierPrices = $product->getPriceModel()->getTierPriceCount();
+                return 'hello';
+                $result[$productIds] = $tierPrices;
+
+
+        return $result;
+
+
+    }
 
 }

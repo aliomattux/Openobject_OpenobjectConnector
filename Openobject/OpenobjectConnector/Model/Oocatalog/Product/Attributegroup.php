@@ -33,7 +33,7 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Attributegroup exte
         return $arrGroups;
     }
 
-    public function list($filters = null) {
+    public function items($filters = null) {
         try {
             $collection = Mage :: getModel('eav/entity_attribute_group')->getCollection();
         } catch (Mage_Core_Exception $e) {
