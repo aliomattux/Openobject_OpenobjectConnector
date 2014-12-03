@@ -24,7 +24,7 @@ class Openobject_OpenobjectConnector_Model_Oocustomer_Subscriber extends Mage_Cu
      * @param int $filters
      * @return array
      */
-    public function items($filters=null)
+    public function list($filters=null)
     {
         $collection = Mage::getModel('customer/customer')->getCollection()
             ->addAttributeToSelect('*');

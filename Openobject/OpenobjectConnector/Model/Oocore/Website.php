@@ -11,7 +11,7 @@ Some works Copyright by Mohammed NAHHAS
 class Openobject_OpenobjectConnector_Model_Oocore_Website extends Mage_Catalog_Model_Api_Resource
 {
 
-    public function items($filters=null)
+    public function list($filters=null)
         {
             try
             {

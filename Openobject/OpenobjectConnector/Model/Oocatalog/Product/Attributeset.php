@@ -14,7 +14,7 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Attributeset extend
      *
      * @return array
      */
-    public function items()
+    public function list()
     {
         $entityType = Mage::getModel('catalog/product')->getResource()->getEntityType();
         $collection = Mage::getResourceModel('eav/entity_attribute_set_collection')

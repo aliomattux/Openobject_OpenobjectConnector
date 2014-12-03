@@ -24,7 +24,7 @@ class Openobject_OpenobjectConnector_Model_Oocustomer_Address extends Mage_Custo
      * @param int $customerId
      * @return array
      */
-    public function items($customerId)
+    public function list($customerId)
     {
         $customer = Mage::getModel('customer/customer')
             ->load($customerId);

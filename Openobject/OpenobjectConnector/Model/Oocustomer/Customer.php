@@ -50,7 +50,7 @@ class Openobject_OpenobjectConnector_Model_Oocustomer_Customer extends Mage_Cata
             return $result;
         }
 
-        public function items($filters=null)
+        public function list($filters=null)
         {
             try
             {

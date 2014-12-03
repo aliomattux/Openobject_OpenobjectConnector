@@ -8,7 +8,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate websites</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create Websites</title>
@@ -46,7 +46,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate groups</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create groups</title>
@@ -88,7 +88,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate stores</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create stores</title>
@@ -130,7 +130,7 @@
                 <methods>
                     <list translate="title" module="catalog">
                         <title>Retrieve product image list</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <info translate="title" module="catalog">
                         <title>Retrieve product category image</title>
@@ -197,7 +197,7 @@
                 <methods>
                     <list translate="title" module="catalog">
                         <title>Retrieve attribute list</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <optioninfo translate="title" module="catalog">
                         <title>Fetch detail of Attribute Option</title>
@@ -226,7 +226,7 @@
                 <methods>
                     <list translate="title" module="catalog">
                         <title>Retrieve attribute group list</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <info translate="title" module="catalog">
                         <title>Retrieve full attribute details</title>
@@ -243,7 +243,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate groups</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create groups</title>
@@ -284,7 +284,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate groups</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create groups</title>
@@ -325,7 +325,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate subscriber</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create subscriber</title>
@@ -370,7 +370,7 @@
                     </search>
                     <list translate="title" module="core">
                         <title>Enumerate Customers</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create Customers</title>
@@ -411,12 +411,8 @@
                 <methods>
                     <list translate="title" module="catalog">
                         <title>Retrieve attribute list</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
-                    <items2 translate="title" module="catalog">
-                        <title>Retrieve attribute list</title>
-                        <method>items2</method>
-                    </items2>
                 </methods>
                 <faults>
                     <product_not_exists>
@@ -444,7 +440,7 @@
                     </search>
                     <list translate="title" module="core">
                         <title>Enumerate Products</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <create translate="title" module="core">
                         <title>Create Products</title>
@@ -493,7 +489,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate Attribute sets</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                 </methods>
                 <faults module="core">
@@ -518,7 +514,7 @@
                 <methods>
                     <list translate="title" module="core">
                         <title>Enumerate configurable Products</title>
-                        <method>items</method>
+                        <method>list</method>
                     </list>
                     <assign translate="title" module="catalog">
                         <title>Assign simple product in configurable product</title>

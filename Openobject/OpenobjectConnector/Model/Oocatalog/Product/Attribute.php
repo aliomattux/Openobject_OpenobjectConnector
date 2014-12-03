@@ -63,7 +63,7 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Attribute extends M
         return $result;
 
     }
-    public function items($setId) {
+    public function list($setId) {
 	$attributes = Mage::getResourceModel('catalog/product_attribute_collection');
 	$attributes->addFieldToFilter('attribute_code', array('nin' => array('sku', 'name', 'description', 'short_description', 'weight', 'category_ids', 'set', 'price', 'cost', 'visibility', 'custom_design')));
         $result = array ();
