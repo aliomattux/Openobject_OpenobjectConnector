@@ -158,9 +158,9 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
                 }
 
                 $coll_array['super_attributes'] = $attrs;
-	       }
+	        }
 
-        $result[] = $coll_array;
+            $result[] = $coll_array;
 
         }
 

@@ -67,57 +67,6 @@ class Openobject_OpenobjectConnector_Model_Oocore_Groups extends Mage_Catalog_Mo
         
     }
 
-    public function create($groupdata) {
-        try {
-            $group = Mage::getModel('core/store_group')
-                    ->setData($groupdata)
-                    ->save();
 
-        }
-        catch (Magento_Core_Exception $e) {
-            $this->_fault('data_invalid',$e->getMessage());
-        }
-        catch (Exception $e) {
-            $this->_fault('data_invalid',$e->getMessage());
-        }
-        return $group->getId();
-    }
-
-    public function update($groupid,$groupdata) {
-        try {
-            $group = Mage::getModel('core/store_group')
-                ->load($groupid);
-            if (!$group->getId()) {
-                $this->_fault('group_not_exists');
-            }
-            $group->addData($groupdata)->save();
-        }
-        catch (Magento_Core_Exception $e) {
-            $this->_fault('data_invalid',$e->getMessage());
-        }
-        catch (Exception $e) {
-            $this->_fault('data_invalid',$e->getMessage());
-        }
-        return true;
-    }
-
-    public function delete($groupid) {
-        try {
-            $group = Mage::getModel('core/store_group')
-                ->load($groupid);
-            if (!$group->getId()) {
-                $this->_fault('group_not_exists');
-            }
-            $group->delete();
-
-        }
-        catch (Magento_Core_Exception $e) {
-            $this->_fault('data_invalid',$e->getMessage());
-        }
-        catch (Exception $e) {
-            $this->_fault('data_invalid',$e->getMessage());
-        }
-        return true;
-    }
 }
 ?>

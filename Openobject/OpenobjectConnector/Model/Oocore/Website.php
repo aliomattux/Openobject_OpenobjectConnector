@@ -74,74 +74,7 @@ class Openobject_OpenobjectConnector_Model_Oocore_Website extends Mage_Catalog_M
                 }
 
         }
-    //This is a protected function used by items & info for fetching website information
-    
-    public function create($websitedata)
-        {
-            try
-            {
-                $website = Mage::getModel('core/website')
-                    ->setData($websitedata)
-                    ->save();
 
-            }
-            catch (Magento_Core_Exception $e)
-            {
-                $this->_fault('data_invalid',$e->getMessage());
-            }
-            catch (Exception $e)
-            {
-                $this->_fault('data_invalid',$e->getMessage());
-            }
-            return $website->getId();
-        }
-
-        public function update($websiteid,$websitedata)
-        {
-            try
-            {
-                $website = Mage::getModel('core/website')
-                    ->load($websiteid);
-                if (!$website->getId())
-                {
-                    $this->_fault('website_not_exists');
-                }
-                $website->addData($websitedata)->save();
-            }
-            catch (Magento_Core_Exception $e)
-            {
-                $this->_fault('data_invalid',$e->getMessage());
-            }
-            catch (Exception $e)
-            {
-                $this->_fault('data_invalid',$e->getMessage());
-            }
-            return true;
-        }
-
-        public function delete($websiteid)
-        {
-            try
-            {
-                $website = Mage::getModel('core/website')
-                    ->load($websiteid);
-                if (!$website->getId())
-                {
-                    $this->_fault('website_not_exists');
-                }
-                $website->delete();
-                
-            }
-            catch (Magento_Core_Exception $e)
-            {
-                $this->_fault('data_invalid',$e->getMessage());
-            }
-            catch (Exception $e)
-            {
-                $this->_fault('data_invalid',$e->getMessage());
-            }
-            return true;
-        }
         
     public function tree()
     {
