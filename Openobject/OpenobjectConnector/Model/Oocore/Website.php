@@ -8,12 +8,11 @@
 *Some works Copyright by Mohammed NAHHAS
 */
 
-class Openobject_OpenobjectConnector_Model_Oocore_Website extends Mage_Catalog_Model_Api_Resource
-{
+class Openobject_OpenobjectConnector_Model_Oocore_Website extends Mage_Catalog_Model_Api_Resource {
 
     public function items($filters=null) {
         try {
-            collection = Mage::getModel('core/website')->getCollection();//->addAttributeToSelect('*');
+            $collection = Mage::getModel('core/website')->getCollection();//->addAttributeToSelect('*');
         }
         catch (Mage_Core_Exception $e) {
             $this->_fault('store_not_exists');
