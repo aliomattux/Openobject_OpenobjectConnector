@@ -1,12 +1,12 @@
 <?php
 
 /**
-Openobject Magento Connector
-Generic API Extension for Magento Community/Enterprise Editions
-This connector is a reboot of the original Openlabs OpenERP Connector
-Copyright 2014 Kyle Waid
-Copyright 2009 Openlabs / Sharoon Thomas
-Some works Copyright by Mohammed NAHHAS
+*Openobject Magento Connector
+*Generic API Extension for Magento Community/Enterprise Editions
+*This connector is a reboot of the original Openlabs OpenERP Connector
+*Copyright 2014 Kyle Waid
+*Copyright 2009 Openlabs / Sharoon Thomas
+*Some works Copyright by Mohammed NAHHAS
 */
 
 class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Attribute extends Mage_Catalog_Model_Api_Resource {
@@ -25,33 +25,33 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Attribute extends M
      */
 
     public function optioninfo($optionId, $store = null) {
+        /* I do not understand the purpose of this function and it may not be needed */
         $coreResource = Mage::getSingleton('core/resource');
         $conn = $coreResource->getConnection('core_read');
-	if (!$store) {
-	    $store = 0;
-	}
+        if (!$store) {
+            $store = 0;
+        }
         $select = $conn->select()
-            ->from($coreResource->getTableName('eav_attribute_option_value'), array('eav_attribute_option_value.option_id', 'option.attribute_id', 'value', 'value_id', 'store_id'))
-	    ->joinLeft(array("option" => 'eav_attribute_option'), "eav_attribute_option_value.option_id = option.option_id")
+            ->from($coreResource->getTableName('eav_attribute_option_value'), array('eav_attribute_option_value.option_id',
+                                                                                    'option.attribute_id',
+                                                                                    'value',
+                                                                                    'value_id',
+                                                                                    'store_id'
+                                                                                    ))
+            ->joinLeft(array("option" => 'eav_attribute_option'), "eav_attribute_option_value.option_id = option.option_id")
             ->where('eav_attribute_option_value.option_id = ?', $optionId)
-	    ->where('store_id = ?', $store);
-	$result = $conn->fetchRow($select);
-	if ($result) {
+            ->where('store_id = ?', $store);
+        $result = $conn->fetchRow($select);
+        if ($result) {
             return $result;
         }
 
-    
         return false;
     }
 
 
-    /**
-     * Retrieve attributes from specified attribute set
-     *
-     * @param int $setId
-     * @return array
-     */
-    public function relations($setId){
+    public function relations($setId) {
+        /* Return all attributes from a given set */
         $attributes = Mage :: getModel('catalog/product')->getResource()->loadAllAttributes()->getSortedAttributes($setId);
         $result = array ();
         foreach ($attributes as $attribute){
@@ -63,9 +63,23 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Attribute extends M
         return $result;
 
     }
+
+
     public function items($setId) {
-	$attributes = Mage::getResourceModel('catalog/product_attribute_collection');
-	$attributes->addFieldToFilter('attribute_code', array('nin' => array('sku', 'name', 'description', 'short_description', 'weight', 'category_ids', 'set', 'price', 'cost', 'visibility', 'custom_design')));
+        /* Return a list of all attributes given a set */
+        $attributes = Mage::getResourceModel('catalog/product_attribute_collection');
+        $attributes->addFieldToFilter('attribute_code', array('nin' => array('sku',
+                                                                    'name',
+                                                                    'description',
+                                                                    'short_description',
+                                                                    'weight',
+                                                                    'category_ids',
+                                                                    'set',
+                                                                    'price',
+                                                                    'cost',
+                                                                    'visibility',
+                                                                    'custom_design'
+                                                                    )));
         $result = array ();
 
         foreach ($attributes as $attribute) {
@@ -77,23 +91,22 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Attribute extends M
         return $result;
     }
 
+
     public function info($attributeId) {
+        /* Get details on an attribute */
         try {
-            return 'hello';
             $attribute = Mage :: getModel('catalog/product')->getResource()->getAttribute($attributeId);
             return $attribute->toArray();
-        } catch (Exception $e) {
+        } 
+
+        catch (Exception $e) {
             $this->_fault('not_exists');
         }
     }
-    /**
-     * Retrieve attribute options
-     *
-     * @param int $attributeId
-     * @param string|int $store
-     * @return array
-     */
+
+
     public function options($attributeId, $store = null) {
+        /*Get options/values of an attribute */
         $storeId = $this->_getStoreId($store);
         $attribute = Mage :: getModel('catalog/product')->setStoreId($storeId)->getResource()->getAttribute($attributeId)->setStoreId($storeId);
 

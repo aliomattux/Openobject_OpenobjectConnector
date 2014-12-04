@@ -1,12 +1,13 @@
 <?php
 /**
-Openobject Magento Connector
-Generic API Extension for Magento Community/Enterprise Editions
-This connector is a reboot of the original Openlabs OpenERP Connector
-Copyright 2014 Kyle Waid
-Copyright 2009 Openlabs / Sharoon Thomas
-Some works Copyright by Mohammed NAHHAS
+*Openobject Magento Connector
+*Generic API Extension for Magento Community/Enterprise Editions
+*This connector is a reboot of the original Openlabs OpenERP Connector
+*Copyright 2014 Kyle Waid
+*Copyright 2009 Openlabs / Sharoon Thomas
+*Some works Copyright by Mohammed NAHHAS
 */
+
 class Openobject_OpenobjectConnector_Model_Oocatalog_Product_Tierprice extends Mage_Catalog_Model_Api_Resource {
     const ATTRIBUTE_CODE = 'tier_price';
 

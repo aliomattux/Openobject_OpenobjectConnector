@@ -191,7 +191,7 @@
                 </faults>
             </oo_catalog_category_media>
             <oo_catalog_product_attribute translate="title" module="catalog">
-                <title>Product Images API</title>
+                <title>Product Attribute API</title>
                 <model>ooconnector/oocatalog_product_attribute</model>
                 <acl>catalog/category</acl>
                 <methods>
@@ -220,7 +220,7 @@
                 </faults>
             </oo_catalog_product_attribute>
             <oo_catalog_product_attribute_group translate="title" module="catalog">
-                <title>Product Images API</title>
+                <title>Product Attribute Group API</title>
                 <model>ooconnector/oocatalog_product_attributegroup</model>
                 <acl>catalog/category</acl>
                 <methods>
@@ -434,14 +434,14 @@
                 <model>ooconnector/oocatalog_products</model>
                 <acl>catalog/product</acl>
                 <methods>
-                    <old_search translate="title" module="core">
+                    <filtersearch translate="title" module="core">
                         <title>Return the list of customer ids that match with the filter</title>
-                        <method>old_search</method>
-                    </old_search>
-                    <search translate="title" module="core">
+                        <method>filtersearch</method>
+                    </filtersearch>
+                    <allsqlsearch translate="title" module="core">
                         <title>Return the list of products ids that match with the filter</title>
-                        <method>search</method>
-                    </search>
+                        <method>allsqlsearch</method>
+                    </allsqlsearch>
                     <list translate="title" module="core">
                         <title>Fetch list of products</title>
                         <method>items</method>

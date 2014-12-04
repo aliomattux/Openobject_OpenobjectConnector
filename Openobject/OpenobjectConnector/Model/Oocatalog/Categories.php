@@ -1,14 +1,14 @@
 <?php
-
-
 /**
- * @author Sharoon Thomas
- * Inspired from Dieter's Magento Extender
- * @copyright 2009
- */
+*Openobject Magento Connector
+*Generic API Extension for Magento Community/Enterprise Editions
+*This connector is a reboot of the original Openlabs OpenERP Connector
+*Copyright 2014 Kyle Waid
+*Copyright 2009 Openlabs / Sharoon Thomas
+*Some works Copyright by Mohammed NAHHAS
+*/
 
-class Openobject_OpenobjectConnector_Model_Oocatalog_Categories extends Mage_Catalog_Model_Api_Resource
-{
+class Openobject_OpenobjectConnector_Model_Oocatalog_Categories extends Mage_Catalog_Model_Api_Resource {
     public function items($filters = null) {
         try {
             $collection = Mage :: getModel('catalog/category/attribute')->getCollection()->addAttributeToSelect('image');
@@ -35,6 +35,7 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Categories extends Mage_Cat
         }
         return $result;
     }
+
 
     public function info($categoryId = null) {
         if (is_numeric($categoryId)) {
@@ -75,37 +76,39 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Categories extends Mage_Cat
 
     }
 
-public function create($filename,$imgdata) {
-    if ($filename)
-    {
-        $path = Mage :: getBaseDir('media') . DS . 'catalog' . DS . 'category' . DS;
-        $fullpath = $path . $filename;
-        try
-        {
-            $fp = fopen($fullpath, "w");
-            if ($fp==false)
-            {
-                return "Error in file creation";
+
+    public function create($filename,$imgdata) {
+        if ($filename) {
+            $path = Mage :: getBaseDir('media') . DS . 'catalog' . DS . 'category' . DS;
+            $fullpath = $path . $filename;
+            try {
+                $fp = fopen($fullpath, "w");
+                if ($fp==false) {
+                    return "Error in file creation";
+                }
+
+                $img_data = base64_decode($imgdata);
+                $imagebin = fwrite($fp,$img_data);
+                fclose($fp);
+                return $imagebin;
             }
-            $img_data = base64_decode($imgdata);
-            $imagebin = fwrite($fp,$img_data);
-            fclose($fp);
-            return $imagebin;
-        }
-        catch (Exception $e)
-        {
-            $this->_fault('not_created');
-        }
+
+            catch (Exception $e) {
+                $this->_fault('not_created');
+            }
         return False;
+        }
     }
-}
-public function update($something=null)
-{
-    return "Not implemented yet";
-}
-public function remove($something=null)
-{
-    return "Not implemented yet";
-}
+
+
+    public function update($something=null) {
+        return "Not implemented yet";
+    }
+
+
+    public function remove($something=null) {
+        return "Not implemented yet";
+    }
+
 }
 ?>
