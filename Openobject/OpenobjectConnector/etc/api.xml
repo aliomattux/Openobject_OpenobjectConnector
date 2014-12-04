@@ -7,36 +7,19 @@
                 <acl>core/store</acl>
                 <methods>
                     <list translate="title" module="core">
-                        <title>Enumerate websites</title>
+                        <title>list websites</title>
                         <method>items</method>
                     </list>
-                    <create translate="title" module="core">
-                        <title>Create Websites</title>
-                        <!--Parameters are code,name,is_default,sort_order,default_group_id,group_ids-->
-                        <method>create</method>
-                    </create>
                     <info translate="title" module="core">
                         <title>Fetch detail of websites</title>
                         <method>info</method>
                     </info>
-                    <update translate="title" module="core">
-                        <title>Update websites info</title>
-                        <method>update</method>
-                    </update>
-                    <delete translate="title" module="core">
-                        <title>Delete websites</title>
-                        <method>delete</method>
-                    </delete>
                 </methods>
                 <faults module="core">
                     <website_not_exists>
                         <code>101</code>
                         <message>Requested website not found.</message>
                     </website_not_exists>
-                    <data_invalid>
-                        <code>102</code>
-                        <message>Website creation failed due to invalid data.</message>
-                    </data_invalid>
                 </faults>
             </oo_websites>
             <oo_groups translate="title" module="core">
@@ -48,33 +31,16 @@
                         <title>Enumerate groups</title>
                         <method>items</method>
                     </list>
-                    <create translate="title" module="core">
-                        <title>Create groups</title>
-                        <!--Parameters are code,name,is_default,sort_order,default_group_id,group_ids-->
-                        <method>create</method>
-                    </create>
                     <info translate="title" module="core">
                         <title>Fetch detail of groups</title>
                         <method>info</method>
                     </info>
-                    <update translate="title" module="core">
-                        <title>Update groups info</title>
-                        <method>update</method>
-                    </update>
-                    <delete translate="title" module="core">
-                        <title>Delete groups</title>
-                        <method>delete</method>
-                    </delete>
                 </methods>
                 <faults module="core">
                     <group_not_exists>
                         <code>101</code>
                         <message>Requested group not found.</message>
                     </group_not_exists>
-                    <data_invalid>
-                        <code>102</code>
-                        <message>group creation failed due to invalid data.</message>
-                    </data_invalid>
                     <filters_invalid>
                         <code>103</code>
                         <message>Invalid data fetch filter.</message>
@@ -87,36 +53,19 @@
                 <acl>core/store</acl>
                 <methods>
                     <list translate="title" module="core">
-                        <title>Enumerate stores</title>
+                        <title>list stores</title>
                         <method>items</method>
                     </list>
-                    <create translate="title" module="core">
-                        <title>Create stores</title>
-                        <!--Parameters are code,name,is_default,sort_order,default_group_id,group_ids-->
-                        <method>create</method>
-                    </create>
                     <info translate="title" module="core">
                         <title>Fetch detail of stores</title>
                         <method>info</method>
                     </info>
-                    <update translate="title" module="core">
-                        <title>Update stores info</title>
-                        <method>update</method>
-                    </update>
-                    <delete translate="title" module="core">
-                        <title>Delete stores</title>
-                        <method>delete</method>
-                    </delete>
                 </methods>
                 <faults module="core">
                     <store_not_exists>
                         <code>101</code>
                         <message>Requested store not found.</message>
                     </store_not_exists>
-                    <data_invalid>
-                        <code>102</code>
-                        <message>Store creation failed due to invalid data.</message>
-                    </data_invalid>
                     <filters_invalid>
                         <code>103</code>
                         <message>Invalid data fetch filter.</message>
