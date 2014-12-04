@@ -9,34 +9,34 @@
 */
 
 class Openobject_OpenobjectConnector_Model_Oocore_Groups extends Mage_Catalog_Model_Api_Resource {
-        public function items($filters=null) {
-            try {
-                $collection = Mage::getModel('core/store_group')->getCollection();//->addAttributeToSelect('*');
-            }
-            catch (Mage_Core_Exception $e) {
-               $this->_fault('group_not_exists');
-            }
-            
-            if (is_array($filters)) {
-                try {
-                    foreach ($filters as $field => $value) {
-                        $collection->addFieldToFilter($field, $value);
-                    }
-                }
-
-		catch (Mage_Core_Exception $e) {
-                    $this->_fault('filters_invalid', $e->getMessage());
-                    // If we are adding filter on non-existent attribute
-                }
-            }
-
-            $result = array();
-            foreach ($collection as $customer) {
-                $result[] = $customer->toArray();
-            }
-
-            return $result;
+    public function items($filters=null) {
+        try {
+            $collection = Mage::getModel('core/store_group')->getCollection();//->addAttributeToSelect('*');
         }
+        catch (Mage_Core_Exception $e) {
+            $this->_fault('group_not_exists');
+        }
+            
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $field => $value) {
+                    $collection->addFieldToFilter($field, $value);
+                }
+            }
+
+            catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
+                // If we are adding filter on non-existent attribute
+            }
+        }
+
+        $result = array();
+        foreach ($collection as $customer) {
+            $result[] = $customer->toArray();
+        }
+
+        return $result;
+    }
 
 
     public function info($groupIds = null) {
@@ -66,7 +66,6 @@ class Openobject_OpenobjectConnector_Model_Oocore_Groups extends Mage_Catalog_Mo
         }
         
     }
-
 
 }
 ?>
