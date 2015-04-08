@@ -42,17 +42,13 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
                     $collection->addFieldToFilter($field, $value);
                 }
             }
- 
+
 	    catch (Mage_Core_Exception $e) {
                 $this->_fault('filters_invalid', $e->getMessage());
             }
         }
 
-        $result = array();
-
-        foreach ($collection as $product) {
-            $result[] = $product->getId();
-        }
+        $result = $collection->getAllIds();
 
         return $result;
     }
