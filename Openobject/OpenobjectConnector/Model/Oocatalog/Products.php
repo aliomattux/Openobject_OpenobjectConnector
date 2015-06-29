@@ -16,10 +16,55 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
         'type'       => 'type_id'
     );
 
+    protected $_typeMap = array(
+        'related'       => Mage_Catalog_Model_Product_Link::LINK_TYPE_RELATED,
+        'up_sell'       => Mage_Catalog_Model_Product_Link::LINK_TYPE_UPSELL,
+        'cross_sell'    => Mage_Catalog_Model_Product_Link::LINK_TYPE_CROSSSELL,
+        'grouped'       => Mage_Catalog_Model_Product_Link::LINK_TYPE_GROUPED
+    );
+
     public function __construct() {
         $this->_storeIdSessionField = 'product_store_id';
         $this->_ignoredAttributeTypes[] = 'gallery';
         $this->_ignoredAttributeTypes[] = 'media_image';
+    }
+
+
+    protected function _initCollection($link, $product)
+    {
+     	$collection = $link
+            ->getProductCollection()
+            ->setIsStrongMode()
+            ->setProduct($product);
+
+        return $collection;
+    }
+
+
+    public function getProductLinks($product, $typeId, $identifierType = null) {
+    //  $product = _initProduct($collectionItem->getId(), $identifierType);
+
+        $link = $product->getLinkInstance()
+            ->setLinkTypeId($typeId);
+
+        $result = array();
+        $collection = $this->_initCollection($link, $product);
+        foreach ($collection as $linkedProduct) {
+            $row = array(
+                'product_id' => $linkedProduct->getId(),
+                'type'       => $linkedProduct->getTypeId(),
+                'set'        => $linkedProduct->getAttributeSetId(),
+                'sku'        => $linkedProduct->getSku()
+            );
+
+            foreach ($link->getAttributes() as $attribute) {
+                $row[$attribute['code']] = $linkedProduct->getData($attribute['code']);
+            }
+
+            $result[] = $row;
+        }
+
+        return $result;
     }
 
 
@@ -127,7 +172,7 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
     }
 
 
-    public function multinfo($productIds) {
+    public function multinfo($productIds, $includeLinks = false) {
 	/* Fetch multiple products info */
 
 	$store = null;
@@ -144,6 +189,16 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
             $coll_array = $collection_item->toArray();
             $coll_array['categories'] = $collection_item->getCategoryIds();
             $coll_array['websites'] = $collection_item->getWebsiteIds();
+	    //If you want all kinds of links. Will make the call exponentially slower depending on number of links
+	    if ($includeLinks) {
+                if ($collection_item->getTypeId() == 'grouped') {
+                    $coll_array['grouped'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_GROUPED);
+                }
+                $coll_array['up_sell'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_UPSELL);
+                $coll_array['cross_sell'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_CROSSSELL);
+                $coll_array['related'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_RELATED);
+	    }
+
             /*TODO: Put this into a single function as its used more than once */
             if ($collection_item->getTypeId() == 'configurable') {
                 $attribute_array = $collection_item->getTypeInstance(true)->getConfigurableAttributesAsArray($collection_item);
@@ -161,6 +216,28 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
         }
 
         return $result;
+    }
+
+
+    public function getmultiplelinks($productIds) {
+        $collection = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addAttributeToFilter('entity_id', array('in' => $productIds));
+
+	$result = array ();
+	foreach ($collection as $collection_item) {
+	    $coll_array = $collection_item->toArray();
+	    if ($collection_item->getTypeId() == 'grouped') {
+		$coll_array['grouped'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_GROUPED);
+	    }
+            $coll_array['up_sell'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_UPSELL);
+            $coll_array['cross_sell'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_CROSSSELL);
+            $coll_array['related'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_RELATED);
+
+	    $result[] = $coll_array;
+	}
+
+	return $result;
     }
 
 

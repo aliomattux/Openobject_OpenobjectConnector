@@ -403,6 +403,10 @@
                         <title>Fetch multiple product info</title>
                         <method>multinfo</method>
                     </multinfo>
+                    <mgetmultiplelinks translate="title" module="core">
+                        <title>Fetch multiple product links</title>
+                        <method>getmultiplelinks</method>
+                    </getmultiplelinks>
                     <info translate="title" module="core">
                         <title>Fetch single product info</title>
                         <method>info</method>
