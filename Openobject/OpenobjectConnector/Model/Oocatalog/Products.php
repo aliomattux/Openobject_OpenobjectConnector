@@ -67,6 +67,84 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
         return $result;
     }
 
+    public function retrievequotes($filters = null, $store = null) {
+        $this->_dbi = Mage::getSingleton('core/resource') ->getConnection('core_read');
+  //      $baseQuery = "SELECT * FROM quoteadv_customer WHERE quote_id = 4215366";
+    //    $quote = $this->_dbi->fetchAll($baseQuery);
+
+        $_collection = Mage::getModel('qquoteadv/qqadvcustomer')->getCollection();
+        $_collection->addFieldToFilter('is_quote', 1);
+
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $filter => $value) {
+                    $_collection->addFieldToFilter("$filter", $value);
+                }
+            } catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
+            }
+        }
+
+
+        $result = array();
+        foreach ($_collection as $order) {
+            $order_array  = $order->toArray();
+
+            $billingAddresses = Mage::getModel('qquoteadv/quoteaddress')
+                    ->getCollection()
+                    ->addFieldToFilter('quote_id', array('eq' => $order_array['quote_id']))
+                    ->addFieldToFilter('address_type', array('eq' => 'billing'))
+                    ->load();
+
+            $billingAddress = $billingAddresses->getFirstItem();
+
+            $shippingAddresses = Mage::getModel('qquoteadv/quoteaddress')
+                    ->getCollection()
+                    ->addFieldToFilter('quote_id', array('eq' => $order_array['quote_id']))
+                    ->addFieldToFilter('address_type', array('eq' => 'shipping'))
+                    ->load();
+
+            $shippingAddress = $shippingAddresses->getFirstItem();
+
+            $order_array['billing_address'] = $billingAddress->toArray();
+            $order_array['shipping_address'] = $shippingAddress->toArray();
+
+
+            $order_array['customer_firstname'] = $order_array['billing_address']['firstname'];
+            $order_array['customer_lastname'] = $order_array['billing_address']['lastname'];
+            $order_array['customer_email'] = $order_array['email'];
+
+            $_itemsCollection = Mage::getModel('qquoteadv/qqadvproduct')->getCollection()
+                ->addFieldToFilter('quote_id', $order_array['quote_id']);
+
+            $order_array['items'] = array();
+
+            foreach ($_itemsCollection as $orderItem) {
+                $parentItem = $orderItem->toArray();
+
+                $_deepItemCollection = Mage::getModel('qquoteadv/requestitem')->getCollection()
+                    ->addFieldToFilter('quote_id', $order_array['quote_id'])
+                    ->addFieldToFilter('quoteadv_product_id', $parentItem['id']);
+
+                foreach ($_deepItemCollection as $deepItem) {
+                    $dItem = $deepItem->toArray();
+                    $finishedItem = array_replace($parentItem, $dItem);
+                    $loadedItem = Mage::getModel('catalog/product')->load($dItem['product_id']);
+                    $finishedItem['sku'] = $loadedItem->getSku();
+                    $finishedItem['name'] = $loadedItem->getName();
+                    $finishedItem['qty_ordered'] = $finishedItem['qty'];
+                    $finishedItem['price'] = $finishedItem['original_cur_price'];
+                    $finishedItem['parent_item_id'] = null;
+                }
+
+                $order_array['items'][] = $finishedItem;
+            }
+
+
+            $result[] = $order_array;
+        }
+        return $result;
+    }
 
     public function filtersearch($filters = null, $store = null) {
         /*Search for product ids based on filters
