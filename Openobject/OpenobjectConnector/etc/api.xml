@@ -387,6 +387,10 @@
                         <title>Return the list of customer ids that match with the filter</title>
                         <method>filtersearch</method>
                     </filtersearch>
+                    <retrievequotes translate="title" module="core">
+                        <title>Retrieve detailed info about quotes</title>
+                        <method>retrievequotes</method>
+                    </retrievequotes>
                     <allsqlsearch translate="title" module="core">
                         <title>Return the list of products ids that match with the filter</title>
                         <method>allsqlsearch</method>
