@@ -49,37 +49,30 @@ class Openobject_OpenobjectConnector_Model_Sales_Order_Api extends Mage_Sales_Mo
     }
 
 
-    public function search($data) {
+    public function search($filters = null, $store = null) {
+        $collection = Mage::getModel('sales/order')->getCollection()
+            ->setStoreId($this->_getStoreId($store));
 
-        $result = array();
-        if(isset($data['imported'])) {
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $field => $value) {
+                    if (isset($this->_filtersMap[$field])) {
+                        $field = $this->_filtersMap[$field];
+                    }
 
-            $collection = Mage::getModel("sales/order")->getCollection()
-                ->addAttributeToSelect('increment_id')
-                ->addAttributeToFilter('imported', array('eq' => $data['imported']));
-
-            if(isset($data['limit'])) {
-                $collection->setPageSize($data['limit']);
-                $collection->setOrder('entity_id', 'ASC');
-            }
-
-            if(isset($data['filters']) && is_array($data['filters'])) {
-                $filters = $data['filters'];
-                foreach($filters as $field => $value) {
-                    $collection->addAttributeToFilter($field, $value);
+                    $collection->addFieldToFilter($field, $value);
                 }
             }
 
-            foreach ($collection as $order) {
-                $result[] =  $order['increment_id'];
+            catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
             }
-
-            return $result;
-        }else{
-            $this->_fault('data_invalid', "Error, the attribut 'imported' need to be specified");
         }
-    }
 
+        $result = $collection->getAllIds();
+
+        return $result;
+    }
 
     /**
      *
