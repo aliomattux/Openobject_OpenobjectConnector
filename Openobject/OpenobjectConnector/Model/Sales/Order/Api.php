@@ -50,8 +50,8 @@ class Openobject_OpenobjectConnector_Model_Sales_Order_Api extends Mage_Sales_Mo
 
 
     public function search($filters = null, $store = null) {
-        $collection = Mage::getModel('sales/order')->getCollection()
-            ->setStoreId($this->_getStoreId($store));
+        $collection = Mage::getModel('sales/order')->getCollection();
+//            ->setStoreId($this->_getStoreId($store));
 
         if (is_array($filters)) {
             try {
