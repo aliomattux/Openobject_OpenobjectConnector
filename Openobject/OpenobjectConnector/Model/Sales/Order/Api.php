@@ -50,8 +50,9 @@ class Openobject_OpenobjectConnector_Model_Sales_Order_Api extends Mage_Sales_Mo
 
 
     public function search($filters = null, $store = null) {
-        $collection = Mage::getModel('sales/order')->getCollection();
-//            ->setStoreId($this->_getStoreId($store));
+        $collection = Mage::getModel('sales/order')->getCollection()
+        ->addAttributeToSelect('increment_id');
+         //   ->setStoreId($this->_getStoreId($store));
 
         if (is_array($filters)) {
             try {
@@ -69,7 +70,7 @@ class Openobject_OpenobjectConnector_Model_Sales_Order_Api extends Mage_Sales_Mo
             }
         }
 
-        $result = $collection->getAllIds();
+        $result = $collection->getData();
 
         return $result;
     }
