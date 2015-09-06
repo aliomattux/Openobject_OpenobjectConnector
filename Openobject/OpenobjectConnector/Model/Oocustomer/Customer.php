@@ -20,34 +20,69 @@ class Openobject_OpenobjectConnector_Model_Oocustomer_Customer extends Mage_Cata
          * @param array $filters
          * @return array
          */
-        public function search($filters)
-        {
-            
-            $collection = Mage::getModel('customer/customer')->getCollection()
-                ->addAttributeToSelect('*');
 
-            if (is_array($filters)) {
-                try {
-                    foreach ($filters as $field => $value) {
-                        if (isset($this->_mapFilters[$field])) {
-                            $field = $this->_mapFilters[$field];
-                        }
+    public function search($filters = null) {
+        /*Search for product ids based on filters
+        *This function is not good because it iterates over every result, which is very slow
+        *TODO: Improve efficiency */
 
-                        $collection->addFieldToFilter($field, $value);
+        $collection = Mage::getModel('customer/customer')->getCollection()
+          //  ->setStoreId($this->_getStoreId($store))
+            ->addAttributeToSelect('entity_id');
+
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $field => $value) {
+                    if (isset($this->_filtersMap[$field])) {
+                        $field = $this->_filtersMap[$field];
                     }
-                } catch (Mage_Core_Exception $e) {
-                    $this->_fault('filters_invalid', $e->getMessage());
+
+                    $collection->addFieldToFilter($field, $value);
                 }
             }
 
-            $result = array();
-
-            foreach ($collection as $product) {
-                $result[] = $product->getId();
+        catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
             }
-
-            return $result;
         }
+
+        $result = $collection->getAllIds();
+
+        return $result;
+    }
+
+    public function multinfo($customerIds) {
+
+        $collection = Mage::getModel('customer/customer')
+                ->getCollection()
+                ->addAttributeToFilter('entity_id', array('in' => $customerIds))
+                ->addAttributeToSelect('*');
+
+        $result = array();
+
+        foreach ($collection as $collection_item) {
+            $coll_array = $collection_item->toArray();
+            $addresses = array();
+
+            $this->_dbi = Mage::getSingleton('core/resource') ->getConnection('core_read');
+            $query = "SELECT entity_id FROM customer_address_entity WHERE parent_id = {$coll_array['entity_id']}";
+            $addressIds = $this->_dbi->fetchCol($query);
+            $addressesCollection = Mage::getResourceModel('customer/address_collection')
+               // ->getCollection()
+                ->addFieldToFilter('entity_id', array('in' => $addressIds))
+                ->addAttributeToSelect('*');
+
+            foreach ($addressesCollection as $address) {
+                $addresses[] = $address->toArray();
+
+            }
+            $coll_array['test_id'] = $coll_array['entity_id'];
+            $coll_array['addresses'] = $addresses;
+            $result[] = $coll_array;
+        }
+
+        return $result;
+    }
 
         public function items($filters=null)
         {

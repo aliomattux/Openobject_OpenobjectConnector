@@ -177,18 +177,6 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
     }
 
 
-    public function allsqlsearch($filters = null, $store = null) {
-        /*TODO: This function is clearly not good, but it is very fast. Refactor into something better */
-        $this->_dbi = Mage::getSingleton('core/resource') ->getConnection('core_read');
-        $query = "
-                SELECT entity.entity_id FROM catalog_product_entity entity
-                JOIN catalog_product_entity_int ints ON (entity.entity_id = ints.entity_id AND attribute_id IN (SELECT attribute_id FROM eav_attribute WHERE entity_type_id = 4 AND attribute_code = 'status'))
-                WHERE ints.value = 1";
-
-	   return $this->_dbi->fetchCol($query);
-    }
-
-
     public function items($filters = null, $store = null) {
         $collection = Mage::getModel('catalog/product')->getCollection()
             ->setStoreId($this->_getStoreId($store))
@@ -255,7 +243,6 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
 
 	$store = null;
 	$filters = null;
-
 	$collection = Mage::getModel('catalog/product')
                 ->getCollection()
                 ->addAttributeToFilter('entity_id', array('in' => $productIds))
@@ -267,15 +254,15 @@ class Openobject_OpenobjectConnector_Model_Oocatalog_Products extends Mage_Catal
             $coll_array = $collection_item->toArray();
             $coll_array['categories'] = $collection_item->getCategoryIds();
             $coll_array['websites'] = $collection_item->getWebsiteIds();
-	    //If you want all kinds of links. Will make the call exponentially slower depending on number of links
-	    if ($includeLinks) {
+	        //If you want all kinds of links. Will make the call exponentially slower depending on number of links
+	        if ($includeLinks) {
                 if ($collection_item->getTypeId() == 'grouped') {
                     $coll_array['grouped'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_GROUPED);
                 }
                 $coll_array['up_sell'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_UPSELL);
                 $coll_array['cross_sell'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_CROSSSELL);
                 $coll_array['related'] = $this->getProductLinks($collection_item, Mage_Catalog_Model_Product_Link::LINK_TYPE_RELATED);
-	    }
+	        }
 
             /*TODO: Put this into a single function as its used more than once */
             if ($collection_item->getTypeId() == 'configurable') {

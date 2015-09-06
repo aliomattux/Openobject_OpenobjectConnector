@@ -39,6 +39,23 @@ class Openobject_OpenobjectConnector_Model_Oocore_Website extends Mage_Catalog_M
     }
 
 
+    public function users() {
+        $userCollection = Mage::getModel('admin/user')
+        ->getCollection()
+        ->addFieldToSelect('email')
+        ->addFieldToSelect('firstname')
+        ->addFieldToSelect('lastname')
+        ->addFieldToSelect('user_id');
+
+        $result = array();
+        foreach ($userCollection as $user) {
+            $result[] = $user->toArray();
+        }
+
+        return $result;
+    }
+
+
     public function info($storeIds = null) {
         $stores = array();
 

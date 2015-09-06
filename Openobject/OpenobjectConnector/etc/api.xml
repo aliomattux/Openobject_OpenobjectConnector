@@ -10,6 +10,10 @@
                         <title>list websites</title>
                         <method>items</method>
                     </list>
+                    <users translate="title" module="core">
+                        <title>list Users</title>
+                        <method>users</method>
+                    </users>
                     <info translate="title" module="core">
                         <title>Fetch detail of websites</title>
                         <method>info</method>
@@ -329,6 +333,10 @@
                         <title>Fetch detail of customers</title>
                         <method>info</method>
                     </info>
+                    <multinfo translate="title" module="core">
+                        <title>Fetch detail of groups</title>
+                        <method>multinfo</method>
+                    </multinfo>
                     <update translate="title" module="core">
                         <title>Update customers info</title>
                         <method>update</method>
@@ -391,10 +399,6 @@
                         <title>Retrieve detailed info about quotes</title>
                         <method>retrievequotes</method>
                     </retrievequotes>
-                    <allsqlsearch translate="title" module="core">
-                        <title>Return the list of products ids that match with the filter</title>
-                        <method>allsqlsearch</method>
-                    </allsqlsearch>
                     <list translate="title" module="core">
                         <title>Fetch list of products</title>
                         <method>items</method>
@@ -501,6 +505,14 @@
                 <model>sales/order_api</model>
                 <title>Custom Sales Orders API</title>
                 <methods>
+                    <getregionid translate="title" module="core">
+                        <title>Get the Magento ID of a state</title>
+                        <method>getregionid</method>
+                    </getregionid>
+                    <createquote translate="title" module="core">
+                        <title>Create a quote record</title>
+                        <method>createquote</method>
+                    </createquote>
                     <search translate="title" module="Openobject_OpenobjectConnector">
                         <title>Return the list of products ids that match with the filter</title>
                         <method>search</method>
@@ -537,6 +549,10 @@
                         <title>Fetch all the available states for an order</title>
                         <method>getOrderStates</method>
                     </get_order_states>
+                    <taxes_info translate="title" module="Openobject_OpenobjectConnector">
+                        <title>Fetch all the available Taxes</title>
+                        <method>get_taxes_info</method>
+                    </taxes_info>
                     <shipping_methods translate="title" module="Openobject_OpenobjectConnector">
                         <title>Fetch all the available Shipment Methods</title>
                         <method>get_all_shipping_methods</method>
