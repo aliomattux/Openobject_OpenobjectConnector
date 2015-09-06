@@ -41,35 +41,21 @@ class Openobject_OpenobjectConnector_Model_Sales_Order_Api extends Mage_Sales_Mo
 	    $order_array['payment'] = $this->_getAttributes($order->getPayment(), 'order_payment');
 	    $order_array['shipping_address'] = $this->_getAttributes($order->getShippingAddress(), 'order_address');
 	    $order_array['billing_address'] = $this->_getAttributes($order->getBillingAddress(), 'order_address');
-//	    $order_array['user_id'] = Mage::helper('amperm')->getCurrentSalesPersonId();
-	    //$order_array['messages'] = Mage::getModel('amperm')->getMessages($order->getId());
-	    $msgs = array();
-	    $message = Mage::getModel('amperm/message')
-            	->getCollection()
-            	->addFieldToFilter('order_id', $order->getId())
-            	->setOrder('created_at','desc')->getFirstItem();
+            //This only works if you have cart2quote installed.... what to do about this.
+            try {
+	        $msgs = array();
+	        $message = Mage::getModel('amperm/message')
+            	    ->getCollection()
+            	    ->addFieldToFilter('order_id', $order->getId())
+            	    ->setOrder('created_at','desc')->getFirstItem();
 
-	    $msg_data = $message->toArray();
-//	    foreach ($messages as $msg) {
-	//	$msg_data = $msg->toArray();
-	    $msg_data['user_data'] = Mage::getModel('admin/user')->load($msg_data['to_id'])->getData();
-//	    $msg_data['username'] = Mage::getModel('admin/user')->getCollection()->addFieldToFilter('username',$msg_data['to_id'])->getFirstItem()->getData();
-//	    $msgs[] = $msg->toArray();
-//	    }
+	        $msg_data = $message->toArray();
+	        $msg_data['user_data'] = Mage::getModel('admin/user')->load($msg_data['to_id'])->getData();
 
-	    $order_array['messages'] = $msg_data;
-
-//            if ($order_array['quote_id']) {
-  //              $quote_collection = Mage::getModel('qquoteadv/qqadvcustomer')
-//		->getCollection()
-//		->addFieldToFilter('quote_id', $order_array['quote_id']);
-//		->addAttributeToSelect('*');
-
-//	//	$quote = $quote_collection[0];
-//		foreach ($quote_collection as $quote) {
-//		$order_array['quote_info'] = $quote->toArray();
-//		}
-  //          }
+	        $order_array['messages'] = $msg_data;
+            }
+            catch (Exception $e) {
+            }
 
 	    $result[] = $order_array;
 
