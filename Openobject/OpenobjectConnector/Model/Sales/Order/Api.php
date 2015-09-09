@@ -202,6 +202,11 @@ class Openobject_OpenobjectConnector_Model_Sales_Order_Api extends Mage_Sales_Mo
         return Mage::getSingleton("sales/order_config")->getStates();
     }
 
+    /* Retrieve order statuses */
+    public function getStateApiStatuses($state) {
+        return Mage::getSingleton("sales/order_config")->getStateStatuses($state);
+    }
+
 
     /* Retrieve invoices increment ids of the order */
     public function getInvoiceIds($incrementId) {

@@ -549,6 +549,11 @@
                         <title>Fetch all the available states for an order</title>
                         <method>getOrderStates</method>
                     </get_order_states>
+                    <get_order_statuses translate="title" module="Openobject_OpenobjectConnector">
+                        <title>Fetch all the available statuses for an order</title>
+                        <method>getStateApiStatuses</method>
+                    </get_order_statuses>
+
                     <taxes_info translate="title" module="Openobject_OpenobjectConnector">
                         <title>Fetch all the available Taxes</title>
                         <method>get_taxes_info</method>
