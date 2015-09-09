@@ -42,21 +42,6 @@ class Openobject_OpenobjectConnector_Model_Sales_Order_Api extends Mage_Sales_Mo
 	    $order_array['shipping_address'] = $this->_getAttributes($order->getShippingAddress(), 'order_address');
 	    $order_array['billing_address'] = $this->_getAttributes($order->getBillingAddress(), 'order_address');
             //This only works if you have cart2quote installed.... what to do about this.
-            try {
-	        $msgs = array();
-	        $message = Mage::getModel('amperm/message')
-            	    ->getCollection()
-            	    ->addFieldToFilter('order_id', $order->getId())
-            	    ->setOrder('created_at','desc')->getFirstItem();
-
-	        $msg_data = $message->toArray();
-	        $msg_data['user_data'] = Mage::getModel('admin/user')->load($msg_data['to_id'])->getData();
-
-	        $order_array['messages'] = $msg_data;
-            }
-            catch (Exception $e) {
-            }
-
 	    $result[] = $order_array;
 
 	}
